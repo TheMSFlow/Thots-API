@@ -40,7 +40,8 @@ class UserLoginSerializer(serializers.Serializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ["bio", "profile_picture"]
+        fields = ["username", "first_name", "last_name", "bio", "profile_picture"]
+
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -49,3 +50,4 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "email", "profile"]
+

@@ -49,3 +49,12 @@ class CurrentUserView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class UserListView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]  # Only authenticated users
+
+    def get_queryset(self):
+        # Exclude superusers
+        return User.objects.filter(is_superuser=False)

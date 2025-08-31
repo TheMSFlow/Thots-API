@@ -45,14 +45,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+
+    # your apps
     "users",
     "posts",
     "comments",
-    'likes',
+    "likes",
     "follows",
+
+    # graphql
+    "graphene_django",
+
+    "corsheaders",
 ]
 
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,4 +137,12 @@ AUTH_USER_MODEL = "users.User"
 AUTHENTICATION_BACKENDS = [
     "users.backends.EmailBackend",
     "django.contrib.auth.backends.ModelBackend",
+]
+
+GRAPHENE = {
+    "SCHEMA": "thots_api.schema.schema" 
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
 ]

@@ -1,52 +1,74 @@
-# Capstone Project Part 3: Build
+# Thots API
 
-## Project Idea
-**Thots** — Build a custom Django REST API to power your Thots, a social media feed app that lets users view posts, like, comment, and share content.
+Thots API is a **social media backend** built with **Django + Django REST Framework**  
+It provides endpoints for **users, posts, comments, likes, and follows**.  
 
----
-
-## Progress Report
-With more clarity about my project, I have made the necessary changes as seen in my API endpoints and ERD.  
-Next week I’ll start with building the API endpoints.
+The API powers a React frontend but can be used by any client (mobile, SPA, etc.).
 
 ---
 
-## ERD (Updated)
-**UPDATED ERD**
-
-*(Insert ERD diagram here)*
-
----
-
-## API Endpoints (Updated)
-
-### Initial Endpoints
-| Endpoint         | Method | Description                     | Request Body                                                                 | Response               |
-|------------------|--------|---------------------------------|----------------------------------------------------------------------------|------------------------|
-| `/users/`        | GET    | Get all mock users              | None                                                                       | List of users          |
-| `/posts/`        | GET    | Get all posts                   | None                                                                       | List of posts          |
-| `/posts/`        | POST   | Create a new post               | `{ "user_id": 1, "content": "...", "hashtag": "#tag" }`                     | Created post           |
-| `/posts/{id}/`   | GET    | Get single post                 | None                                                                       | Post object            |
-| `/likes/`        | POST   | Like a post increment (like_amount) | `{ "post_id": 1, "user_id": 1 }`                                           | Updated like count     |
-| `/comments/`     | POST   | Add a comment to a post         | `{ "post_id": 1, "user_id": 1, "content": "Nice post!" }`                   | Created comment        |
-| `/comments/{post_id}/` | GET | Get comments for a specific post | None                                                                       | List of comments       |
-| `/feed/`         | GET    | Get posts with likes & comments included | None                                                                   | Full feed data         |
+## Features
+- User authentication (Register, Login, Logout, Current User)
+- Create, Read, Update, Delete (CRUD) for Posts
+- Comment on posts
+- Like and unlike posts
+- Follow / unfollow users
+- REST API (default) + GraphQL endpoint (optional)
+- Token & Session authentication
+- CORS enabled for local frontend dev
 
 ---
 
-### Updated Endpoints
-| Endpoint         | Method   | Description                   | Auth Required |
-|------------------|----------|-------------------------------|---------------|
-| `/auth/register/`| POST     | Register new user             | ❌            |
-| `/auth/login/`   | POST     | Login and get token           | ❌            |
-| `/users/`        | GET      | List all users                | ✅            |
-| `/users/{id}/`   | GET      | Get user profile              | ✅            |
-| `/users/{id}/`   | PUT/PATCH| Update own profile            | ✅            |
-| `/posts/`        | GET      | List all posts (or own posts) | ✅            |
-| `/posts/`        | POST     | Create post                   | ✅            |
-| `/posts/{id}/`   | GET      | Get post details              | ✅            |
-| `/posts/{id}/`   | PUT/PATCH| Update post (author only)     | ✅            |
-| `/posts/{id}/`   | DELETE   | Delete post (author only)     | ✅            |
-| `/follow/`       | POST     | Follow another user           | ✅            |
-| `/unfollow/`     | POST     | Unfollow another user         | ✅            |
-| `/feed/`         | GET      | View feed of followed users   | ✅            |
+## Tech Stack
+- **Backend:** Django, Django REST Framework, Graphene-Django
+- **Auth:** TokenAuthentication & SessionAuthentication
+- **Database:** PostgreSQL (via `DATABASE_URL`)
+- **Frontend:** React + Apollo Client (GraphQL) or Axios/Fetch (REST)
+- **Other:** Django CORS Headers
+
+---
+
+
+## Endpoints
+POST /api/register/ → Register new user
+
+POST /api/login/ → Login (returns token)
+
+POST /api/logout/ → Logout
+
+GET /api/me/ → Get current logged-in user
+
+👤 Users
+GET /api/users/ → List all users
+
+📝 Posts
+GET /api/posts/ → List all posts
+
+POST /api/posts/ → Create a post
+
+GET /api/posts/{id}/ → Get single post
+
+PUT /api/posts/{id}/ → Update a post
+
+DELETE /api/posts/{id}/ → Delete a post
+
+💬 Comments
+GET /api/comments/ → List all comments
+
+POST /api/comments/ → Create a comment
+
+GET /api/comments/{id}/ → Get single comment
+
+❤️ Likes
+GET /api/likes/ → List likes
+
+POST /api/likes/ → Like a post
+
+DELETE /api/likes/{id}/ → Unlike
+
+👥 Follows
+GET /api/follows/ → List follows
+
+POST /api/follows/ → Follow a user
+
+DELETE /api/follows/{id}/ → Unfollow
