@@ -51,3 +51,21 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ["id", "email", "profile"]
 
+    def update(self, instance, validated_data):
+        profile_data = validated_data.pop('profile', None)
+        
+        # update User fields (if any)
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        
+        # update nested Profile
+        if profile_data:
+            profile = instance.profile
+            for attr, value in profile_data.items():
+                setattr(profile, attr, value)
+            profile.save()
+        
+        return instance
+
+
