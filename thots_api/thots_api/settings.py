@@ -6,6 +6,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # <-- add this
+
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -31,7 +36,28 @@ REST_FRAMEWORK = {
 }
 
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    # Add your PythonAnywhere domain (replace 'yourusername')
+    "msflow.pythonanywhere.com",
+    # Add your custom domain if you’ll use one
+    # "api.yourdomain.com",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://yourusername.pythonanywhere.com",
+    # Add your frontend domain(s) if calling from browser:
+    # "https://your-frontend.com",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    # Add your frontend domain(s):
+    # "https://your-frontend.com",
+]
+
 
 
 # Application definition
@@ -125,7 +151,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
