@@ -30,18 +30,19 @@ The API powers a React frontend but can be used by any client (mobile, SPA, etc.
 
 
 ## Endpoints
+
+### Auth
 POST /api/register/ → Register new user
 
 POST /api/login/ → Login (returns token)
 
 POST /api/logout/ → Logout
 
+### Users
+GET /api/users/ → List all users
 GET /api/me/ → Get current logged-in user
 
-👤 Users
-GET /api/users/ → List all users
-
-📝 Posts
+### Posts
 GET /api/posts/ → List all posts
 
 POST /api/posts/ → Create a post
@@ -52,21 +53,21 @@ PUT /api/posts/{id}/ → Update a post
 
 DELETE /api/posts/{id}/ → Delete a post
 
-💬 Comments
+### Comments
 GET /api/comments/ → List all comments
 
 POST /api/comments/ → Create a comment
 
 GET /api/comments/{id}/ → Get single comment
 
-❤️ Likes
+### Likes
 GET /api/likes/ → List likes
 
 POST /api/likes/ → Like a post
 
 DELETE /api/likes/{id}/ → Unlike
 
-👥 Follows
+### Follows
 GET /api/follows/ → List follows
 
 POST /api/follows/ → Follow a user
